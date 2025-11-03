@@ -1,43 +1,257 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mo Siadat • Pre‑Med Advising</title>
+  <meta name="description" content="1:1 advising for pre‑med and aspiring medical students. Strategy, coursework, MCAT prep planning, activities, and application coaching. $50/hr." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🎓</text></svg>">
+  <style>
+    :root{
+      --bg:#0b1020; --panel:#0f162c; --muted:#9aa4b2; --text:#e8eef7; --accent:#7dd3fc; --accent-2:#a5b4fc;
+      --ring: rgba(125,211,252,0.4);
+      --radius: 16px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --mx: 1100px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background: radial-gradient(1200px 600px at 10% -10%, #11224a 0%, transparent 60%), linear-gradient(180deg,#091125 0%, #0b1327 50%, #0a0f1d 100%); color:var(--text); line-height:1.6}
+    a{color:inherit}
+    .container{max-width:var(--mx);margin:0 auto;padding:24px}
+    header.nav{position:sticky;top:0;backdrop-filter:saturate(120%) blur(8px); background:rgba(11,16,32,.6); border-bottom:1px solid rgba(255,255,255,.06); z-index:20}
+    .nav-inner{display:flex;align-items:center;gap:16px;justify-content:space-between; padding:14px 0}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+    .logo{width:36px;height:36px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#081020; border-radius:10px; font-weight:800}
+    .nav-links a{opacity:.85;margin-left:18px;text-decoration:none}
+    .nav-links a:hover{opacity:1}
 
-on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
+    .hero{padding:72px 0 36px}
+    .hero-grid{display:grid;grid-template-columns:1.2fr .8fr; gap:32px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); border-radius:var(--radius); box-shadow:var(--shadow)}
+    .hero .card{padding:28px}
+    h1{font-size:clamp(28px, 4vw, 46px); line-height:1.15; margin:0 0 14px}
+    .lead{color:var(--muted); font-size:clamp(16px,2.4vw,19px)}
+    .badges{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+    .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.12); padding:8px 12px;border-radius:999px;font-size:14px;background:rgba(255,255,255,.03)}
+    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+    .btn{appearance:none;border:0;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer; text-decoration:none; display:inline-flex;align-items:center; gap:8px}
+    .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#0a1020}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.18); color:var(--text)}
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+    .panel{padding:26px}
+    .section{padding:26px 0}
+    .section h2{font-size:clamp(22px,3.2vw,32px); margin:0 0 10px}
+    .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:10px}
+    .kpi{padding:18px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)); border:1px solid rgba(255,255,255,.06)}
+    .kpi .n{font-size:28px;font-weight:800}
+    .kpi .t{color:var(--muted);font-size:14px}
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr); gap:16px}
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr); gap:16px}
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+    .list li{margin:10px 0}
+    .muted{color:var(--muted)}
 
-jobs:
-  # Single deploy job since we're just deploying
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # Upload entire repository
-          path: '.'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+    .price{display:flex;align-items:baseline;gap:8px}
+    .price .big{font-size:40px;font-weight:900}
+
+    .foot{padding:28px 0; border-top:1px solid rgba(255,255,255,.06); color:var(--muted); font-size:14px}
+
+    form.card{display:grid;gap:10px}
+    input, textarea{width:100%; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:var(--text); padding:12px 14px; border-radius:10px}
+    input:focus, textarea:focus{outline:none; box-shadow:0 0 0 6px var(--ring); border-color:transparent}
+
+    @media (max-width: 920px){
+      .hero-grid{grid-template-columns:1fr}
+      .grid-3{grid-template-columns:1fr}
+      .grid-2{grid-template-columns:1fr}
+      .kpis{grid-template-columns:repeat(2,1fr)}
+    }
+  </style>
+</head>
+<body>
+  <!-- Nav -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="brand"><div class="logo">MS</div> Mo Siadat • Pre‑Med Advising</div>
+      <nav class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#results">Results</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="card">
+          <h1>Get into Medical School with a Clear Plan and a Coach</h1>
+          <p class="lead">I'm <strong>Mo Siadat</strong> (UC Davis, <strong>3.93 GPA</strong>). I’ve earned <strong>6 interview invitations</strong> and an <strong>acceptance</strong> this cycle. I help undergrads map the right path early — coursework, activities, MCAT strategy, and compelling applications — for <strong>$50/hour</strong>.</p>
+          <div class="badges">
+            <span class="badge">🎓 UC Davis • Neurobiology, Physiology & Behavior</span>
+            <span class="badge">✅ 6 Interviews • 1+ Acceptance</span>
+            <span class="badge">🩺 Clinic & research mentorship</span>
+          </div>
+          <div class="cta">
+            <a class="btn primary" href="#contact">Book a free intro chat</a>
+            <a class="btn ghost" href="#services">See how I help</a>
+          </div>
+        </div>
+        <aside class="card panel">
+          <h3 style="margin-top:0">What you'll get</h3>
+          <ul class="list">
+            <li>Personalized roadmap by term (courses, MCAT timing, activities)</li>
+            <li>Application strategy (school list, storytelling, update letters)</li>
+            <li>AMCAS/AACOMAS review & bulletproofing</li>
+            <li>Interview prep (MMI/Kira, ethical scenarios, mock Q&A)</li>
+            <li>Weekly accountability & check‑ins</li>
+          </ul>
+          <p class="muted" style="margin:8px 0 0">I focus on clarity, consistency, and realistic steps that fit your life.</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Results / Creds -->
+    <section id="results" class="section">
+      <div class="grid-2">
+        <div class="card panel">
+          <h2>Results & Creds</h2>
+          <div class="kpis">
+            <div class="kpi"><div class="n">3.93</div><div class="t">Undergrad GPA (UC Davis)</div></div>
+            <div class="kpi"><div class="n">6</div><div class="t">Interview invites</div></div>
+            <div class="kpi"><div class="n">1+</div><div class="t">Acceptances this cycle</div></div>
+            <div class="kpi"><div class="n">700+ hrs</div><div class="t">Tutoring & coaching exp.</div></div>
+          </div>
+          <p class="muted">I’ve helped peers plan course loads, prep for MCAT, and turn clinical/service work into strong narratives. We’ll use proven tactics and adapt them to your story.</p>
+        </div>
+        <div class="card panel">
+          <h2>Who I Work With</h2>
+          <ul class="list">
+            <li>Freshmen/Sophomores building the right foundation</li>
+            <li>Juniors/Seniors aligning experiences with a cohesive story</li>
+            <li>Post‑baccs/gap‑year students optimizing timelines & updates</li>
+          </ul>
+          <p class="muted">Any major is welcome — we’ll design a path from where you are now to a confident application.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="section">
+      <h2>Services</h2>
+      <div class="grid-3">
+        <div class="card panel">
+          <h3 style="margin-top:0">Academic & Timeline Planning</h3>
+          <ul class="list">
+            <li>Term‑by‑term course maps (incl. labs & prereqs)</li>
+            <li>MCAT timing aligned with your schedule</li>
+            <li>GPA strategy, study systems, resources</li>
+          </ul>
+        </div>
+        <div class="card panel">
+          <h3 style="margin-top:0">Experience & Leadership</h3>
+          <ul class="list">
+            <li>Clinics, research, leadership ideas that matter</li>
+            <li>How to find roles, email templates, outreach scripts</li>
+            <li>Turning hours into impact and reflection</li>
+          </ul>
+        </div>
+        <div class="card panel">
+          <h3 style="margin-top:0">Application & Interview</h3>
+          <ul class="list">
+            <li>Personal statement & activities polish</li>
+            <li>School list calibration & update letters</li>
+            <li>MMI/Kira prep, mock interviews, debriefs</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="section">
+      <div class="grid-2">
+        <div class="card panel">
+          <h2>Pricing</h2>
+          <p class="price"><span class="big">$50</span> / hour (1:1 coaching)</p>
+          <ul class="list">
+            <li>Pay‑as‑you‑go • No long contracts</li>
+            <li>Shared live notes & action items</li>
+            <li>Optional weekly accountability check‑ins (15 min)</li>
+          </ul>
+          <p class="muted">Need a plan first? Start with a <strong>free 15‑minute intro</strong> to see if we’re a fit.</p>
+        </div>
+        <div class="card panel">
+          <h2>Popular Bundle</h2>
+          <ul class="list">
+            <li>4 sessions: roadmap, experiences, statement, interview prep</li>
+            <li>Priority feedback between calls</li>
+          </ul>
+          <p class="muted">Ask about bundle pricing during our intro chat.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials (placeholder) -->
+    <section class="section">
+      <div class="card panel">
+        <h2>What Students Say</h2>
+        <p class="muted">Add short quotes as you work with students (first name + major). For example:</p>
+        <blockquote style="margin:0;border-left:3px solid rgba(255,255,255,.18);padding-left:14px">“Mo helped me pick courses and plan MCAT timing without burning out. I finally felt in control of my pre‑med path.” — <strong>A., Biology</strong></blockquote>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section">
+      <div class="grid-2">
+        <div class="card panel">
+          <h2>Book a Free Intro Chat</h2>
+          <p class="muted">Use the form to send a message. I’ll reply with times for a quick 15‑minute Zoom to learn about your goals.</p>
+          <form class="card" action="mailto:mosiadattutor@gmail.com" method="post" enctype="text/plain">
+            <input required name="name" type="text" placeholder="Your name" />
+            <input required name="email" type="email" placeholder="Your email" />
+            <textarea required name="message" rows="5" placeholder="Tell me where you are in the journey & what you need"></textarea>
+            <button class="btn primary" type="submit">Send</button>
+            <p class="muted" style="margin:0">Or email me directly: <a href="mailto:mosiadattutor@gmail.com">mosiadattutor@gmail.com</a></p>
+          </form>
+        </div>
+        <div class="card panel">
+          <h2>About Mo</h2>
+          <p>Hi — I’m Mo. I graduated from <strong>UC Davis</strong> with a <strong>3.93 GPA</strong> in Neurobiology, Physiology & Behavior, and I’ve been accepted to medical school after receiving <strong>6 interview invites</strong>. I’ve coached hundreds of students in STEM as a tutor and learning assistant. Now I help pre‑meds design realistic plans, grow, and tell compelling stories.</p>
+          <ul class="list">
+            <li>Location: California (remote available)</li>
+            <li>Response time: within 24 hours</li>
+            <li>Availability: evenings & weekends (Pacific Time)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot container">
+      <div>© <span id="y"></span> Mo Siadat • Pre‑Med Advising • All rights reserved.</div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+
+  <!-- Optional: Basic structured data for local business / service -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Mo Siadat — Pre‑Med Advising",
+    "description": "1:1 advising for pre‑med and aspiring medical students. Coursework, MCAT timing, activities, application coaching.",
+    "areaServed": "United States",
+    "priceRange": "$50/hr",
+    "url": "https://example.com",
+    "email": "mailto:mosiadattutor@gmail.com",
+    "sameAs": []
+  }
+  </script>
+</body>
+</html>
